@@ -29,7 +29,7 @@ const AccordionBody = ({ val }) => {
         </p>
         <p className='text-gray-500 text-sm'>
           From:
-          <span className='pl-1 font-bold'>{val.sender.split('<')[0]}</span>
+          <span className='pl-1 font-semibold'>{val.sender.split('<')[0]}</span>
           <span className='pl-1 text-blue-500 font-base'>
             {`<${val.sender.split('<')[1]}`}
           </span>
@@ -40,7 +40,7 @@ const AccordionBody = ({ val }) => {
         <p className='text-gray-500 text-sm'>Subject: {val.subject}</p>
         <p className='text-gray-500 text-sm'>
           To:
-          <span className='pl-1 font-bold'>{val.receiver.split('<')[0]}</span>
+          <span className='pl-1'>{val.receiver.split('<')[0]}</span>
           <span className='pl-1 text-blue-500 font-base'>
             {`<${val.receiver.split('<')[1]}`}
           </span>
