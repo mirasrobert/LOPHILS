@@ -1,17 +1,32 @@
 import { useState, useEffect } from 'react'
 import Container from './components/Container'
 import { Accordion } from './components/Accordion'
+import Pagination from './components/Pagination'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteItem } from './features/emailSlice'
+import { getItems, setCurrentPage, deleteItem } from './features/emailSlice'
+
+import { ToastContainer, toast } from 'react-toastify'
 
 function App() {
+  const dispatch = useDispatch()
   // Get the data from redux state
   const { data, selectedItems, isLoading } = useSelector(
     (state) => state.emails
   )
 
-  const dispatch = useDispatch()
+  const { currentPage, itemsPerPage, totalItems } = useSelector(
+    (state) => state.emails
+  )
+
+  const handlePageChange = (newPage) => {
+    dispatch(setCurrentPage(newPage))
+  }
+
+  useEffect(() => {
+    // Get All Data
+    dispatch(getItems())
+  }, [dispatch, isLoading])
 
   // Delete Button
   const onDeleteHandler = (e) => {
@@ -19,6 +34,17 @@ function App() {
 
     if (selectedItems && selectedItems.length > 0) {
       dispatch(deleteItem(selectedItems))
+
+      toast.success(`${selectedItems.length} items(s) has been deleted.`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
     }
   }
 
@@ -26,7 +52,7 @@ function App() {
     <div className='py-12'>
       <Container>
         <div className=''>
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center flex-col md:flex-row md:justify-between'>
             <div className='h-30 flex space-x-4 items-center'>
               <input
                 id='default-checkbox'
@@ -95,11 +121,14 @@ function App() {
             </div>
 
             <div>
-              <p className='text-gray-800 text-sm'>
-                <button>{`<`}</button>
-                <span className='mx-2'>50 of 100</span>
-                <button>{`>`}</button>
-              </p>
+              {!isLoading && (
+                <Pagination
+                  currentPage={currentPage}
+                  itemsPerPage={itemsPerPage}
+                  totalItems={totalItems}
+                  onPageChange={handlePageChange}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -118,6 +147,8 @@ function App() {
             data.map((val) => <Accordion val={val} key={val.id} />)}
         </div>
       </Container>
+
+      <ToastContainer />
     </div>
   )
 }

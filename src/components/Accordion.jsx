@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import AccordionBody from './AccordionBody'
-import AccordionTop from './AccordionTop'
 
 import { useDispatch } from 'react-redux'
 import moment from 'moment/moment'
@@ -57,7 +56,7 @@ export const Accordion = ({ val }) => {
           type='button'
           className='flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl bg-white'
           data-accordion-target={`#accordion-collapse-body-${val.id}`}
-          aria-expanded={false}
+          aria-expanded={expand}
           aria-controls={`accordion-collapse-body-${val.id}`}>
           <div className='flex flex-col md:flex-row space-x-4 items-center'>
             <div className='flex space-x-4 items-center'>
@@ -147,8 +146,10 @@ export const Accordion = ({ val }) => {
       {/* Accordion Body */}
       <div
         id={`accordion-collapse-body-${val.id}`}
-        className='hidden mb-5 rounded-md border border-2'
-        aria-labelledby='accordion-collapse-heading-1'>
+        className={`mb-5 rounded-md border border-2 ${
+          expand == false ? 'hidden' : 'block'
+        }`}
+        aria-labelledby={`accordion-collapse-heading-${val.id}`}>
         <AccordionBody val={val} />
       </div>
     </>
