@@ -1,6 +1,5 @@
 function Pagination({ currentPage, itemsPerPage, totalItems, onPageChange }) {
   const totalPages = Math.ceil(totalItems / itemsPerPage)
-  //const pages = [...Array(totalPages).keys()].map((i) => i + 1)
 
   return (
     <div>

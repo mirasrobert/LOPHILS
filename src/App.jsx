@@ -10,14 +10,16 @@ import { ToastContainer, toast } from 'react-toastify'
 
 function App() {
   const dispatch = useDispatch()
-  // Get the data from redux state
-  const { data, selectedItems, isLoading } = useSelector(
-    (state) => state.emails
-  )
 
-  const { currentPage, itemsPerPage, totalItems } = useSelector(
-    (state) => state.emails
-  )
+  // Get the data from redux state
+  const {
+    data,
+    selectedItems,
+    isLoading,
+    currentPage,
+    itemsPerPage,
+    totalItems,
+  } = useSelector((state) => state.emails)
 
   const handlePageChange = (newPage) => {
     dispatch(setCurrentPage(newPage))
