@@ -20,7 +20,7 @@ Run REACTJS project:
 
 <br>
 
-I used VITE to create REACTJS [https://vitejs.dev/guide/]
+I used VITE to create REACTJS [https://vitejs.dev/guide/] instead of create-react-app
 
 <br>
 
