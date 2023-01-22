@@ -20,6 +20,7 @@ const initialState = {
   currentPage: 1,
   itemsPerPage: 50,
   totalItems: DATA ? DATA.length : 0,
+  currentItemsShowed: 50,
   deletedItems: [],
 }
 
@@ -100,6 +101,8 @@ const setPaginatedDataState = (state, action) => {
 
   // Set the paginated data to state
   state.data = newData.slice(startIndex, endIndex)
+
+  state.currentItemsShowed = state.data.length
 }
 
 export const { getItems, setCurrentPage, deleteItem, selectItem } =

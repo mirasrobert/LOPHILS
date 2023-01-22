@@ -7,8 +7,14 @@ const Header = () => {
   const dispatch = useDispatch()
 
   // Get the data from redux state
-  const { selectedItems, isLoading, currentPage, itemsPerPage, totalItems } =
-    useSelector((state) => state.emails)
+  const {
+    selectedItems,
+    isLoading,
+    currentPage,
+    itemsPerPage,
+    totalItems,
+    currentItemsShowed,
+  } = useSelector((state) => state.emails)
 
   // Change Page
   const handlePageChange = (newPage) => {
@@ -113,6 +119,7 @@ const Header = () => {
                 itemsPerPage={itemsPerPage}
                 totalItems={totalItems}
                 onPageChange={handlePageChange}
+                currentItemsCount={currentItemsShowed}
               />
             )}
           </div>

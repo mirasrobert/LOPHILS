@@ -1,4 +1,10 @@
-function Pagination({ currentPage, itemsPerPage, totalItems, onPageChange }) {
+function Pagination({
+  currentPage,
+  itemsPerPage,
+  totalItems,
+  onPageChange,
+  currentItemsCount,
+}) {
   const totalPages = Math.ceil(totalItems / itemsPerPage)
 
   return (
@@ -10,7 +16,7 @@ function Pagination({ currentPage, itemsPerPage, totalItems, onPageChange }) {
         {`<`}
       </button>
       <span className='text-gray-800 text-sm mx-2'>
-        {itemsPerPage} of {totalItems}
+        {currentItemsCount} of {totalItems}
       </span>
       <button
         className='text-gray-800 text-sm'
