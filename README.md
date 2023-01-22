@@ -16,9 +16,7 @@ Go to project and install dependencies:
 
 Run REACTJS project:
 
-<code>
-npm run dev
-</code>
+<code>npm run dev</code>
 
 <br>
 

@@ -18,7 +18,7 @@ const initialState = {
   selectedItems: [],
   isLoading: false,
   currentPage: 1,
-  itemsPerPage: 20,
+  itemsPerPage: 50,
   totalItems: DATA ? DATA.length : 0,
   deletedItems: [],
 }
