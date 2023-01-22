@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     // Get All Data
     dispatch(getItems())
-  }, [dispatch, isLoading])
+  }, [])
 
   // Delete Button
   const onDeleteHandler = (e) => {

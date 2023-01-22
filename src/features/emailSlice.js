@@ -45,17 +45,7 @@ export const emailSlice = createSlice({
       state.currentPage = action.payload
 
       // Logic
-      const startIndex = (state.currentPage - 1) * state.itemsPerPage
-      const endIndex = startIndex + state.itemsPerPage
-
-      let newData = DATA
-
-      // Remove the dedleted items from the paginated data
-      state.deletedItems.forEach((deletedItem) => {
-        newData = newData.filter((data) => data.id !== deletedItem)
-      })
-
-      state.data = newData.slice(startIndex, endIndex)
+      refetch(state, action)
 
       state.isLoading = false
     },
@@ -84,12 +74,10 @@ export const emailSlice = createSlice({
       state.isLoading = true
       const selectedCheckBoxes = action.payload
 
-      selectedCheckBoxes.forEach((element) => {
-        state.data = state.data.filter((item) => item.id != element)
-      })
-
       // Store the deleted items so we can track it when page changes
-      state.deletedItems = selectedCheckBoxes
+      state.deletedItems = [...state.deletedItems, ...selectedCheckBoxes]
+
+      refetch(state, action)
 
       state.selectedItems = []
 
@@ -97,6 +85,21 @@ export const emailSlice = createSlice({
     },
   },
 })
+
+const refetch = (state, action) => {
+  // Refetch
+  const startIndex = (state.currentPage - 1) * state.itemsPerPage
+  const endIndex = startIndex + state.itemsPerPage
+
+  let newData = DATA
+
+  // Remove the dedleted items from the paginated data
+  state.deletedItems.forEach((deletedItem) => {
+    newData = newData.filter((data) => data.id != deletedItem)
+  })
+
+  state.data = newData.slice(startIndex, endIndex)
+}
 
 export const { getItems, setCurrentPage, deleteItem, selectItem } =
   emailSlice.actions
