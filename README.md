@@ -23,3 +23,7 @@ npm run dev
 <br>
 
 I used VITE to create REACTJS [https://vitejs.dev/guide/]
+
+<br>
+
+I added pagination shows 50 per page.
