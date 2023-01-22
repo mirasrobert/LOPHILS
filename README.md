@@ -2,20 +2,17 @@ LOPHILS INC - IT (OJT) - Frontend Developer Exam
 
 Run this repository:
 
-Install vite:
-
-<code>npm create vite@latest</code>
+Clone this repository 
+<code>git clone https://github.com/mirasrobert/LOPHILS.git</code>
 
 <br>
 
 Go to project and install dependencies:
-
 <code>npm install</code>
 
 <br>
 
 Run REACTJS project:
-
 <code>npm run dev</code>
 
 <br>
