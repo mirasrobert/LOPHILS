@@ -18,7 +18,7 @@ const initialState = {
   selectedItems: [],
   isLoading: false,
   currentPage: 1,
-  itemsPerPage: 50,
+  itemsPerPage: 20,
   totalItems: DATA ? DATA.length : 0,
   deletedItems: [],
 }
@@ -45,7 +45,7 @@ export const emailSlice = createSlice({
       state.currentPage = action.payload
 
       // Logic
-      refetch(state, action)
+      setPaginatedDataState(state, action)
 
       state.isLoading = false
     },
@@ -74,10 +74,10 @@ export const emailSlice = createSlice({
       state.isLoading = true
       const selectedCheckBoxes = action.payload
 
-      // Store the deleted items so we can track it when page changes
+      // Store the deleted items so we can track it when page changes to simulate persistent data (fake backend)
       state.deletedItems = [...state.deletedItems, ...selectedCheckBoxes]
 
-      refetch(state, action)
+      setPaginatedDataState(state, action)
 
       state.selectedItems = []
 
@@ -86,18 +86,19 @@ export const emailSlice = createSlice({
   },
 })
 
-const refetch = (state, action) => {
+const setPaginatedDataState = (state, action) => {
   // Refetch
   const startIndex = (state.currentPage - 1) * state.itemsPerPage
   const endIndex = startIndex + state.itemsPerPage
 
-  let newData = DATA
+  let newData = [...DATA] // Copy
 
-  // Remove the dedleted items from the paginated data
+  // Remove the deleted items from the data before paginating
   state.deletedItems.forEach((deletedItem) => {
     newData = newData.filter((data) => data.id != deletedItem)
   })
 
+  // Set the paginated data to state
   state.data = newData.slice(startIndex, endIndex)
 }
 
